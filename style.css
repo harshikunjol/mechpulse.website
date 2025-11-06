@@ -51,6 +51,7 @@ body {
   background: none;      /* remove white background */
   border-radius: 0;      /* optional: no rounded corners if you want full coverage */
   box-shadow: none;      /* remove shadow if it creates white edges */
+  padding: 0 10px;
 }
 
 body {
@@ -71,7 +72,7 @@ body {
   padding: 30px;
   border-radius: 12px;
   position: absolute;
-  overflow-y: auto; /* vertical scrolling if too much content */
+  overflow-y: hidden; /* vertical scrolling if too much content */
   overflow-x: hidden;   /* block horizontal scroll */
   background: white;
   scrollbar-width: thin;
@@ -395,17 +396,14 @@ body {
 }
 
 @media (max-width: 768px) {
-  .page {
-    width: 100%;
-    padding: 10px;
-    border-radius: 0;
-  }
-
   .cover-title {
-    font-size: 26px;
+    font-size: 28px;
   }
-
   .cover-sub {
-    font-size: 14px;
+    font-size: 16px;
+  }
+  #controls-row {
+    bottom: 10px;
   }
 }
+
