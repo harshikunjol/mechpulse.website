@@ -1,0 +1,87 @@
+/* ✅ Apply style only for this product page */
+.product-page6 {
+  background: linear-gradient(to right, #bbd6da, #f305cb); /* Soft turquoise to peach gradient */
+  padding: 30px;
+  border-radius: 12px;
+  width: 90%;
+  margin: 20px auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+/* Title */
+/* Product page title font styling */
+.product-page6 h2 {
+  font-family: "Anton", serif;
+  font-weight: 700;
+  font-family: 'Permanent Marker', cursive;
+  font-size: 34px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: #3b0106;
+  text-align: center;
+  text-shadow: 0 3px 8px rgba(0,0,0,0.2);
+}
+
+/* Gallery Layout */
+.product-page6 .gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+/* Each Item Box */
+.product-page6 .item {
+  background: #fff3e0;  /* Light peach background for cards */
+  border-radius: 10px;
+  padding: 10px;          /* reduce padding if too much */
+  text-align: center;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.12);
+  display: flex;
+  flex-direction: column;  /* stack image and text vertically */
+  align-items: center;
+  gap: 2px;                /* small space between image and description */
+}
+
+/* Hover Effect */
+.product-page6 .item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.2);
+}
+
+/* Images */
+.product-page6 .item img {
+  width: 90%;
+  height: 120px;
+  object-fit: calc();
+  border-radius: 10px;
+  margin-bottom: 10px;
+  border: 2px solid #ffd54f; /* subtle gold border for pop */
+}
+
+/* Product Text */
+.product-page6 .item p {
+  margin: 0; 
+  font-size: 14px;
+  font-style: italic; /* ✅ */
+  font-family: 'Dancing Script', cursive; /* ✅ handwriting font */
+  color: #0f0d0d;  /* Dark brown for readability */
+  line-height: 1.3;
+  font-weight: 500;
+}
+
+/* Description Paragraph */
+.product-page6 > p {
+  margin-top: 0px;
+  background: #fffde7; /* light yellow for contrast */
+  font-family: 'Shadows Into Light', cursive;
+  font-weight: 600;
+  padding: 1px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  font-size: 15px;
+  color: #1f1e1e; /* Deep brown */
+  margin: 1;        /* remove default top & bottom margin */
+  padding: 1;       /* optional: remove extra padding */
+}
+
