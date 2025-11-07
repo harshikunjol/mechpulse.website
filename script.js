@@ -1,4 +1,4 @@
-// pages & controls
+// ------------------- Flipbook Pages & Controls -------------------
 const pages = document.querySelectorAll(".page");
 let currentPage = 0;
 
@@ -8,7 +8,7 @@ const prevBtn = document.getElementById("prev-btn");
 const nextBtn = document.getElementById("next-btn");
 const downloadBtn = document.getElementById("download-btn");
 
-// show a given page index
+// Show a given page index
 function showPage(num) {
   if (num < 0) num = 0;
   if (num >= pages.length) num = pages.length - 1;
@@ -23,7 +23,7 @@ function showPage(num) {
   nextBtn.disabled = currentPage === pages.length - 1;
 }
 
-// navigation functions (exposed for Start button)
+// Navigation functions
 function nextPage() {
   if (currentPage < pages.length - 1) showPage(currentPage + 1);
 }
@@ -31,17 +31,17 @@ function prevPage() {
   if (currentPage > 0) showPage(currentPage - 1);
 }
 
-// wire buttons
+// Wire buttons
 prevBtn.addEventListener("click", prevPage);
 nextBtn.addEventListener("click", nextPage);
 
-// keyboard navigation
+// Keyboard navigation
 document.addEventListener("keydown", (e) => {
   if (e.key === "ArrowRight") nextPage();
   if (e.key === "ArrowLeft") prevPage();
 });
 
-// touch swipe support
+// Touch swipe support for flipbook pages
 let touchStartX = 0;
 document.addEventListener("touchstart", (e) => (touchStartX = e.touches[0].clientX));
 document.addEventListener("touchend", (e) => {
@@ -50,9 +50,8 @@ document.addEventListener("touchend", (e) => {
   if (touchEndX - touchStartX > 50) prevPage(); // swipe right -> prev
 });
 
-// PDF Download logic (exports all pages with styling)
+// ------------------- PDF Download Logic -------------------
 downloadBtn.addEventListener("click", () => {
-  // clone book container and make all pages visible
   const clone = document.createElement("div");
   clone.style.width = "800px";
   clone.style.background = "#fff";
@@ -62,30 +61,27 @@ downloadBtn.addEventListener("click", () => {
     const c = p.cloneNode(true);
     c.style.display = "block";
     c.style.pageBreakAfter = "always";
-    // remove any absolute positioned elements that may overlap in PDF, but keep look:
     c.querySelectorAll(".start-btn").forEach(b => b.remove());
     clone.appendChild(c);
   });
 
-  const opt = {
+  html2pdf().from(clone).set({
     margin: 0.25,
     filename: "flipbook-styled.pdf",
     image: { type: "jpeg", quality: 0.95 },
     html2canvas: { scale: 2, useCORS: true },
     jsPDF: { unit: "in", format: "a4", orientation: "portrait" }
-  };
-
-  html2pdf().from(clone).set(opt).save();
+  }).save();
 });
 
-// initialize
+// ------------------- Flipbook Initialization -------------------
 showPage(0);
 
 $("#flipbook").turn({
-    width: 1000,   // book width
-    height: 700,   // book height
+    width: 1000,
+    height: 700,
     autoCenter: true,
-    display: 'double', // shows 2 pages like a real book
+    display: 'double',
     elevation: 50,
     gradients: true,
     acceleration: true
@@ -94,18 +90,38 @@ $("#flipbook").turn({
 document.getElementById("nextBtn").addEventListener("click", () => pageFlip.flipNext());
 document.getElementById("prevBtn").addEventListener("click", () => pageFlip.flipPrev());
 
-
+// ------------------- Full Page PDF -------------------
 document.getElementById("download-btn").addEventListener("click", async function() {
-  const element = document.getElementById("wrapper"); // capture the whole page
+  const element = document.getElementById("wrapper");
+  html2pdf().set({
+    margin: 0.2,
+    filename: 'full_website.pdf',
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: { scale: 2, useCORS: true, logging: true },
+    jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+  }).from(element).save();
+});
 
-  html2pdf()
-    .set({
-      margin: 0.2,
-      filename: 'full_website.pdf',
-      image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { scale: 2, useCORS: true, logging: true },
-      jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
-    })
-    .from(element)
-    .save();
+// ------------------- Mobile-Friendly Gallery Swipe -------------------
+const galleries = document.querySelectorAll('.product-page2 .gallery');
+
+galleries.forEach((gallery) => {
+  let startX = 0;
+
+  gallery.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+    e.stopPropagation(); // prevent page swipe
+  });
+
+  gallery.addEventListener('touchmove', (e) => {
+    const moveX = e.touches[0].clientX;
+    const diff = startX - moveX;
+    gallery.scrollLeft += diff; // scroll gallery manually
+    startX = moveX;
+    e.stopPropagation();
+  });
+
+  gallery.addEventListener('touchend', (e) => {
+    e.stopPropagation();
+  });
 });
