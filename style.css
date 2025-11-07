@@ -28,20 +28,44 @@ body {
 /* First page cover image fix */
 .page1 .cover-img {
   width: 100%;
-  height: 100dvh;          /* full screen height */
-  object-fit: cover;    /* show full image without cutting */
+  height: 100vh;          /* full screen height */
+  object-fit: contain;    /* show full image without cutting */
   display: block;
   margin: 0 auto;
 }
 
 
+.page {
+    position: relative;
+}
+
+.contact-info {
+    position: absolute;
+    bottom: 12px;
+    right: 18px;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.2;
+    color: #ffffff;
+    text-align: right;
+    text-shadow: 1px 1px 3px #000;
+    z-index: 1000;
+    pointer-events: none;
+    opacity: 0.9;
+}
+
+.contact-link {
+    color: #fff;
+    pointer-events: auto;
+    text-decoration: none;
+}
 
 
 /* Book container */
 #book {
   width: 1000px;          /* fixed width for desktop */
   max-width: 100%;
-  height: 100dvh;         /* fill entire vertical viewport */
+  height: 100vh;         /* fill entire vertical viewport */
   margin: 0;
   display: flex;
   justify-content: center;
@@ -52,16 +76,6 @@ body {
   border-radius: 0;      /* optional: no rounded corners if you want full coverage */
   box-shadow: none;      /* remove shadow if it creates white edges */
   padding: 0 10px;
-}
-
-body {
-  display: flex;
-  justify-content: center; /* horizontal center */
-  align-items: center;     /* vertical center */
-  min-height: 100dvh;       /* full viewport height */
-  margin: 0;
-  background-color: #f0f0f0; /* optional outer background */
-  flex-direction: column;
 }
 
 
@@ -95,8 +109,8 @@ body {
   position: absolute;
   inset: 0;
   width:100%;
-  height: 100%;
-  object-fit: cover;       /* cover the page area */
+  height: auto;
+  object-fit: contain;       /* cover the page area */
   display: block;
   z-index: 0;
   filter: saturate(1) contrast(0.95);
@@ -407,3 +421,62 @@ body {
   }
 }
 
+
+/* ========================================================= */
+/* ✅ RESPONSIVE FIXES ADDED BELOW (DO NOT REMOVE) */
+/* ========================================================= */
+
+@media (max-width: 768px) {
+    .page1 .cover-img {
+        height: 100dvh;
+        object-fit: contain;
+    }
+
+    #book {
+        width: 100%;
+        height: auto;
+        padding: 0;
+        overflow: visible;
+    }
+
+    .page {
+        margin: 0;
+        width: 100%;
+        height: auto;
+        padding: 20px;
+    }
+
+    #prev-btn, #next-btn {
+        position: static;
+        display: inline-block;
+        margin: 10px;
+    }
+
+    #controls-row {
+        text-align: center;
+        margin-top: 10px;
+        height: auto;
+    }
+
+    .contact-info {
+        font-size: 12px;
+        bottom: 8px;
+        right: 10px;
+    }
+
+    .page h2 {
+        font-size: 1.4rem;
+    }
+
+    .product-details p,
+    .features li {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery img {
+        width: 120px;
+        height: 120px;
+    }
+}
