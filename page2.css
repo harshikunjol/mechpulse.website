@@ -85,3 +85,11 @@
   padding: 10;       /* optional: remove extra padding */
 }
 
+@media (max-width: 480px) {
+  .product-page2 .item img {
+    height: 110px; /* smaller so text fits nicely */
+  }
+  .product-page2 h2 {
+    font-size: 26px; /* avoid overflow */
+  }
+}
